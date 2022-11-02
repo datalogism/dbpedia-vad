@@ -82,7 +82,7 @@
          _resource_ := 'http://dbpedia.org' || _resource_;
      }
 
-   host := http_request_header (http_request_header (), 'Host');
+   host := 'fr.dbpedia.org';
    project_name := 'dbpedia.org';
 
    -- setup default graph (project_home_page)
@@ -115,7 +115,7 @@
 
    -- setup rdf alternative links
    rdf_link := sprintf('http://%s/sparql?default-graph-uri=%U&query=%U',
-		http_request_header (http_request_header (), 'Host'),
+		'fr.dbpedia.org',
 		registry_get ('dbp_graph'),
 		'DESCRIBE <' || charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') || '>');
 
@@ -137,7 +137,7 @@
        project_home_page := registry_get('dbp_graph') || '/resource/classes#';
      rdf_link2 := dbp_ldd_get_proxy (replace (page_resource_uri, '/ontology/', '/data3/'));
        rdf_link := sprintf('http://%s/sparql?default-graph-uri=%U&query=%U',
-		http_request_header (http_request_header (), 'Host'),
+		'fr.dbpedia.org',
 		registry_get ('dbp_graph') || '/resource/classes',
 		'DESCRIBE <' || charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') || '>');
        gen_rdf_link := rdf_link;
