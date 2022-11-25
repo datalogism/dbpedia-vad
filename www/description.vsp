@@ -82,7 +82,7 @@
          _resource_ := 'http://dbpedia.org' || _resource_;
      }
 
-   host := http_request_header (http_request_header (), 'Host');
+   host := 'fr.dbpedia.org';
    project_name := 'dbpedia.org';
 
    -- setup default graph (project_home_page)
@@ -114,9 +114,8 @@
    __box_flags_set (page_resource_uri, 2);
 
    -- setup rdf alternative links
-   rdf_link := sprintf('http://%s/sparql?default-graph-uri=%U&query=%U',
-    http_request_header (http_request_header (), 'Host'),
-    registry_get ('dbp_graph'),
+   rdf_link := sprintf('http://%s/sparql?default-graph-uri=&query=%U',
+    'fr.dbpedia.org',
     'DESCRIBE <' || charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') || '>');
 
    gen_rdf_link := rdf_link;
@@ -136,9 +135,8 @@
      {
        project_home_page := registry_get('dbp_graph') || '/resource/classes#';
      rdf_link2 := dbp_ldd_get_proxy (replace (page_resource_uri, '/ontology/', '/data3/'));
-       rdf_link := sprintf('http://%s/sparql?default-graph-uri=%U&query=%U',
-    http_request_header (http_request_header (), 'Host'),
-    registry_get ('dbp_graph') || '/resource/classes',
+       rdf_link := sprintf('http://%s/sparql?default-graph-uri=&query=%U',
+    'fr.dbpedia.org',
     'DESCRIBE <' || charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') || '>');
        gen_rdf_link := rdf_link;
      }
@@ -216,7 +214,7 @@
    -- set up thumbnail
    _thumbnail := dbp_ldd_thumbnail (_S, _G);
    if (not length (_thumbnail))
-      _thumbnail := '/statics/images/dbpedia_logo.png';
+      _thumbnail := '/statics/images/logo_dbpediafr.png';
 
 
    -- abstract
@@ -276,8 +274,8 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="http://fr.dbpedia.org" title="About DBpedia" style="color: #2c5078">
-      <img class="img-responsive" src="/statics/images/logo_fr_test2.png" alt="About DBpedia" style="display: inline-block;  margin-top: -12px"/>
+      <a class="navbar-brand" href="http://fr.dbpedia.org" title="About DBpedia Fr" style="color: #2c5078">
+      <img class="img-responsive" src="/statics/images/logo_dbpediafr.png" alt="About DBpedia Fr" style="display: inline-block;  margin-top: -20px"/>
       </a>
   </div>
 
