@@ -241,7 +241,6 @@ create procedure DB.DBA.DBP_CHECK_304 (in lines any, in opts any)
   return dbp_check_if_modified (lines, graph);
 }
 ;
-
 DB.DBA.VHOST_REMOVE (lpath=>'/data');
 DB.DBA.VHOST_DEFINE (lpath=>'/data', ppath=>registry_get('_dbpedia_path_'), is_dav=>atoi (registry_get('_dbpedia_dav_')),
 	 vsp_user=>'dba', opts=>vector ('url_rewrite', 'dbpl_data_rule_list', 'expiration_function', 'DB.DBA.DBP_CHECK_304', 'graph', registry_get ('dbp_graph')));
@@ -249,55 +248,55 @@ DB.DBA.VHOST_DEFINE (lpath=>'/data', ppath=>registry_get('_dbpedia_path_'), is_d
 DB.DBA.URLREWRITE_CREATE_RULELIST ( 'dbpl_data_rule_list', 1, vector ('dbpl_data_rule_0', 'dbpl_data_rule_1', 'dbpl_data_rule_2', 'dbpl_data_rule_3', 'dbpl_data_rule_4', 'dbpl_data_rule_5', 'dbpl_data_rule_6', 'dbpl_data_rule_7', 'dbpl_data_rule_8', 'dbpl_data_rule_9', 'dbpl_data_rule_10', 'dbpl_data_rule_11'));
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_0', 1, '/data/([a-z_\\-]*/)?(.*)', vector ('gr', 'par_1'), 1,
-'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=rdf',
+'/sparql?&query='||dbp_gen_describe('resource')||'&format=rdf',
 vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_1', 1, '/data/([a-z_\\-]*/)?(.*)', vector ('gr', 'par_1'), 1,
-'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=%U',
+'/sparql?&query='||dbp_gen_describe('resource')||'&format=%U',
 vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', '*accept*'), 'DB.DBA.DBP_GRAPH_PARAM',
 				'(application/rdf.xml)|(text/rdf.n3)', 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_2', 1, '/data/([a-z_\\-]*/)?(.*)\\.(ttl)', vector ('gr', 'par_1', 'fmt'), 1,
-'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=text%%2Fturtle',
+'/sparql?&query='||dbp_gen_describe('resource')||'&format=text%%2Fturtle',
 vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_3', 1, '/data/([a-z_\\-]*/)?(.*)\\.(jrdf)', vector ('gr', 'par_1', 'fmt'), 1,
-'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=application%%2Frdf%%2Bjson',
+'/sparql?&query='||dbp_gen_describe('resource')||'&format=application%%2Frdf%%2Bjson',
 vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_4', 1, '/data/([a-z_\\-]*/)?(.*)\\.(json)', vector ('gr', 'par_1', 'fmt'), 1,
-'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=application%%2Fjson',
+'/sparql?&query='||dbp_gen_describe('resource')||'&format=application%%2Fjson',
 vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_5', 1, '/data/([a-z_\\-]*/)?(.*)\\.(xml|rdf)', vector ('gr', 'par_1', 'fmt'), 1,
-'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=rdf',
+'/sparql?&query='||dbp_gen_describe('resource')||'&format=rdf',
 vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 --DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_6', 1, '/data/([a-z_\\-]*/)?(.*)\\.(atom)', vector ('gr', 'par_1', 'fmt'), 1,
---'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=application%%2Fatom%%2Bxml',
+--'/sparql?&query='||dbp_gen_describe('resource')||'&format=application%%2Fatom%%2Bxml',
 --vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_6', 1, '/data/([a-z_\\-]*/)?(.*)\\.(atom)', vector ('gr', 'par_1', 'f'), 1,
-'/sparql?%s&query=define+sql:describe-mode+"DBPEDIA_ODATA"+DESCRIBE+%%3C' || registry_get('dbp_resource_encoded') || '%%3E&output=application%%2Fatom%%2Bxml',
+'/sparql?&query=define+sql:describe-mode+"DBPEDIA_ODATA"+DESCRIBE+%%3C' || registry_get('dbp_resource_encoded') || '%%3E&output=application%%2Fatom%%2Bxml',
 vector ('gr', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM1', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_7', 1, '/data/([a-z_\\-]*/)?(.*)\\.(n3)', vector ('gr', 'par_1', 'fmt'), 1,
-'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=text%%2Fn3',
+'/sparql?&query='||dbp_gen_describe('resource')||'&format=text%%2Fn3',
 vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_8', 1, '/data/([a-z_\\-]*/)?(.*)\\.(nt)', vector ('gr', 'par_1', 'fmt'), 1,
-'/sparql?%s&query='||dbp_gen_describe('resource')||'&format=text%%2Frdf%%2Bn3',
+'/sparql?&query='||dbp_gen_describe('resource')||'&format=text%%2Frdf%%2Bn3',
 vector ('gr', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_9', 1, '/data/([a-z_\\-]*/)?(.*)\\.(jsod)', vector ('gr', 'par_1', 'f'), 1,
-'/sparql?%s&query=define+sql:describe-mode+"DBPEDIA_ODATA"+DESCRIBE+%%3C' || registry_get('dbp_resource_encoded') || '%%3E&output=application%%2Fodata%%2Bjson',
+'/sparql?&query=define+sql:describe-mode+"DBPEDIA_ODATA"+DESCRIBE+%%3C' || registry_get('dbp_resource_encoded') || '%%3E&output=application%%2Fodata%%2Bjson',
 vector ('gr', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM1', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_10', 1, '/data/([a-z_\\-]*/)?(.*)\\.(ntriples)', vector ('gr', 'par_1', 'f'), 1,
-'/sparql?%s&query=define+sql:describe-mode+"DBPEDIA_ODATA"+DESCRIBE+%%3C' || registry_get('dbp_resource_encoded') || '%%3E&output=application%%2Fn-triples',
+'/sparql?&query=define+sql:describe-mode+"DBPEDIA_ODATA"+DESCRIBE+%%3C' || registry_get('dbp_resource_encoded') || '%%3E&output=application%%2Fn-triples',
 vector ('gr', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM1', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 DB.DBA.URLREWRITE_CREATE_REGEX_RULE ( 'dbpl_data_rule_11', 1, '/data/([a-z_\\-]*/)?(.*)\\.(jsonld)', vector ('gr', 'par_1', 'f'), 1,
-'/sparql?%s&query=define+sql:describe-mode+"DBPEDIA_ODATA"+DESCRIBE+%%3C' || registry_get('dbp_resource_encoded') || '%%3E&output=application%%2Fld%%2Bjson',
+'/sparql?&query=define+sql:describe-mode+"DBPEDIA_ODATA"+DESCRIBE+%%3C' || registry_get('dbp_resource_encoded') || '%%3E&output=application%%2Fld%%2Bjson',
 vector ('gr', 'par_1'), 'DB.DBA.DBP_GRAPH_PARAM1', NULL, 2, null, '^{sql:DB.DBA.DBP_LINK_HDR}^');
 
 
