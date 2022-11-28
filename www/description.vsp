@@ -261,7 +261,7 @@
     <meta property="og:url"         content="<?V charset_recode(page_resource_uri, 'UTF-8', '_WIDE_') ?>" />
     <meta property="og:image"       content="<?= _thumbnail ?>" />
     <meta property="og:description" content="<?vsp http (sprintf ('%s', _subject)); ?>" />
-    <meta property="og:site_name"   content="DBpedia" />
+    <meta property="og:site_name"   content="DBpedia Fr" />
     <!-- -->
 </head>
 <body about="<?V charset_recode(page_resource_uri, 'UTF-8', '_WIDE_') ?>">
