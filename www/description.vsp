@@ -82,7 +82,7 @@
          _resource_ := 'http://dbpedia.org' || _resource_;
      }
 
-   host := http_request_header (http_request_header (), 'Host');
+   host := 'fr.dbpedia.org';
    project_name := 'dbpedia.org';
 
    -- setup default graph (project_home_page)
@@ -114,9 +114,8 @@
    __box_flags_set (page_resource_uri, 2);
 
    -- setup rdf alternative links
-      rdf_link := sprintf('http://%s/sparql?default-graph-uri=%U&query=%U',
-    http_request_header (http_request_header (), 'Host'),
-    registry_get ('dbp_graph'),
+   rdf_link := sprintf('http://%s/sparql?default-graph-uri=&query=%U',
+    'fr.dbpedia.org',
     'DESCRIBE <' || charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') || '>');
 
    gen_rdf_link := rdf_link;
@@ -136,9 +135,8 @@
      {
        project_home_page := registry_get('dbp_graph') || '/resource/classes#';
      rdf_link2 := dbp_ldd_get_proxy (replace (page_resource_uri, '/ontology/', '/data3/'));
-       rdf_link := sprintf('http://%s/sparql?default-graph-uri=%U&query=%U',
-    http_request_header (http_request_header (), 'Host'),
-    registry_get ('dbp_graph') || '/resource/classes',
+       rdf_link := sprintf('http://%s/sparql?default-graph-uri=&query=%U',
+    'fr.dbpedia.org',
     'DESCRIBE <' || charset_recode (page_resource_uri, 'UTF-8', '_WIDE_') || '>');
        gen_rdf_link := rdf_link;
      }
@@ -263,7 +261,7 @@
     <meta property="og:url"         content="<?V charset_recode(page_resource_uri, 'UTF-8', '_WIDE_') ?>" />
     <meta property="og:image"       content="<?= _thumbnail ?>" />
     <meta property="og:description" content="<?vsp http (sprintf ('%s', _subject)); ?>" />
-    <meta property="og:site_name"   content="DBpedia" />
+    <meta property="og:site_name"   content="DBpedia Fr" />
     <!-- -->
 </head>
 <body about="<?V charset_recode(page_resource_uri, 'UTF-8', '_WIDE_') ?>">
@@ -300,7 +298,8 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Formats <span class="caret"></span></a>
     <ul class="dropdown-menu">
     <li>&nbsp;RDF:</li>
-        <li><a href="<?= charset_recode(ntriples, 'UTF-8', '_WIDE_') ?>">N-Triples</a></li>
+        <!-- NOT WORKING -->
+        <!--<li><a href="<?= charset_recode(ntriples, 'UTF-8', '_WIDE_') ?>">N-Triples</a></li>-->
         <li><a href="<?= charset_recode(rdf_link, 'UTF-8', '_WIDE_') ?>">N3</a></li>
         <li><a href="<?= charset_recode(rdf_link5, 'UTF-8', '_WIDE_') ?>">Turtle</a></li>
         <li><a href="<?= charset_recode(rdf_link3, 'UTF-8', '_WIDE_') ?>">JSON</a></li>
