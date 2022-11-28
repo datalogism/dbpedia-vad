@@ -430,14 +430,14 @@ create procedure dbp_ldd_subject (in _S any, in _G varchar, in lines any := null
   langs := dbp_ldd_get_default_lang_acc (lines);
 
   best_str := '';
-  exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'en\')) where { graph `iri(??)` { `iri(??)` dbp:comment_live ?l } }',
-  langs), null, null, vector (_G, _S), 0, meta, data);
+  exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'fr\')) where {  `iri(??)` dbp:comment_live ?l  }',
+  langs), null, null, vector (_S), 0, meta, data);
   if (length (data) and data[0][0] is not null and data[0][0] <> 0)
     best_str := data[0][0];
   else
     {
-      exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'en\')) where { graph `iri(??)` { `iri(??)` rdfs:comment ?l } }',
-      langs), null, null, vector (_G, _S), 0, meta, data);
+      exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'fr\')) where {  `iri(??)` rdfs:comment ?l  }',
+      langs), null, null, vector (_S), 0, meta, data);
       if (length (data) and data[0][0] is not null and data[0][0] <> 0)
   best_str := data[0][0];
     }
