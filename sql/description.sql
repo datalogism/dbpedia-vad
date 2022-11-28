@@ -391,7 +391,7 @@ create procedure dbp_ldd_thumbnail (in _S any, in _G varchar)
 
   img := null;
 
-  exec ('sparql select ?o where { graph `iri(??)` { `iri(??)` dbo:thumbnail ?o } } limit 1', null, null, vector (_G, _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
+  exec ('sparql select ?o where { `iri(??)` dbo:thumbnail ?o  } limit 1', null, null, vector (_S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
   if (length (data))
     {
   img := sprintf ('%H', data[0][0]);
@@ -441,7 +441,7 @@ create procedure dbp_ldd_subject (in _S any, in _G varchar, in lines any := null
       if (length (data) and data[0][0] is not null and data[0][0] <> 0)
   best_str := data[0][0];
     }
-  --best_str := charset_recode (best_str, 'UTF-8', '_WIDE_');
+  -- best_str := charset_recode (best_str, 'UTF-8', '_WIDE_');
   return best_str;
 }
 ;
@@ -521,27 +521,17 @@ create procedure dbp_ldd_split_url (in uri varchar, out pref varchar, out res va
 
 create procedure dbp_ldd_get_proxy (in x varchar)
 {
-     if (x like 'nodeID://%')
-
+  if (x like 'nodeID://%')
     return '/about/html/' || x;
-
-  if (x like 'http://dbpedia.org/%' and http_request_header (http_request_header (), 'Host') <> 'dbpedia.org')
-
-    return regexp_replace (x, 'http://dbpedia.org', 'http://'||http_request_header (http_request_header (), 'Host'));
-
-  if (x like registry_get('dbp_domain') || '/%' and http_request_header (http_request_header (), 'Host') <> replace(registry_get('dbp_domain'),'http://',''))
-
-    return regexp_replace (x, registry_get('dbp_domain'), 'http://'||http_request_header (http_request_header (), 'Host'));
-
+  if (x like 'http://dbpedia.org/%' and 'fr.dbpedia.org' <> 'dbpedia.org')
+    return regexp_replace (x, 'http://dbpedia.org', 'http://'||'fr.dbpedia.org');
+  if (x like registry_get('dbp_domain') || '/%' and 'fr.dbpedia.org' <> replace(registry_get('dbp_domain'),'http://',''))
+    return regexp_replace (x, registry_get('dbp_domain'), 'http://'||'fr.dbpedia.org');
 
   if (connection_get ('mappers_installed') = 1 and (
-
       x like 'http://www.w3.org/2002/07/owl%' or
-
       x like 'http://www.w3.org/1999/02/22-rdf-syntax-ns%' or
-
       x like 'http://www.w3.org/2000/01/rdf-schema%'))
-
     return '/about/html/' || replace (x, '#', '%01');
 
   return x;
