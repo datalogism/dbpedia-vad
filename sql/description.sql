@@ -4,7 +4,7 @@
 --  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
 --  project.
 --
---  Copyright (C) 1998-2021 OpenLink Software
+--  Copyright (C) 1998-2022 OpenLink Software
 --
 --  This project is free software; you can redistribute it and/or modify it
 --  under the terms of the GNU General Public License as published by the
@@ -84,7 +84,6 @@ create procedure dbp_ldd_set_ns_decl ()
     'http://www.w3.org/ns/prov#',       'prov',
     'http://xmlns.com/foaf/0.1/',       'foaf',
     'http://yago-knowledge.org/resource/',      'yago-res',
-    'http://purl.org/linguistics/gold/',                       'gold',
 
     'http://commons.wikimedia.org/wiki/',     'wiki-commons',
     'http://www.wikidata.org/entity/',        'wikidata',
@@ -391,7 +390,7 @@ create procedure dbp_ldd_thumbnail (in _S any, in _G varchar)
 
   img := null;
 
-  exec ('sparql select ?o where { `iri(??)` dbo:thumbnail ?o  } limit 1', null, null, vector (_S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
+  exec ('sparql select ?o where { graph `iri(??)` { `iri(??)` dbo:thumbnail ?o } } limit 1', null, null, vector (_G, _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
   if (length (data))
     {
   img := sprintf ('%H', data[0][0]);
@@ -430,18 +429,17 @@ create procedure dbp_ldd_subject (in _S any, in _G varchar, in lines any := null
   langs := dbp_ldd_get_default_lang_acc (lines);
 
   best_str := '';
-  exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'fr\')) where {  `iri(??)` dbp:comment_live ?l  }',
-  langs), null, null, vector (_S), 0, meta, data);
+  exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'en\')) where { graph `iri(??)` { `iri(??)` dbp:comment_live ?l } }',
+  langs), null, null, vector (_G, _S), 0, meta, data);
   if (length (data) and data[0][0] is not null and data[0][0] <> 0)
     best_str := data[0][0];
   else
     {
-      exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'fr\')) where {  `iri(??)` rdfs:comment ?l  }',
-      langs), null, null, vector (_S), 0, meta, data);
+      exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'en\')) where { graph `iri(??)` { `iri(??)` rdfs:comment ?l } }',
+      langs), null, null, vector (_G, _S), 0, meta, data);
       if (length (data) and data[0][0] is not null and data[0][0] <> 0)
   best_str := data[0][0];
     }
-  -- best_str := charset_recode (best_str, 'UTF-8', '_WIDE_');
   return best_str;
 }
 ;
@@ -523,10 +521,12 @@ create procedure dbp_ldd_get_proxy (in x varchar)
 {
   if (x like 'nodeID://%')
     return '/about/html/' || x;
-  if (x like 'http://dbpedia.org/%' and 'fr.dbpedia.org' <> 'dbpedia.org')
-    return regexp_replace (x, 'http://dbpedia.org', 'http://'||'fr.dbpedia.org');
-  if (x like registry_get('dbp_domain') || '/%' and 'fr.dbpedia.org' <> replace(registry_get('dbp_domain'),'http://',''))
-    return regexp_replace (x, registry_get('dbp_domain'), 'http://'||'fr.dbpedia.org');
+
+  -- if (x like 'http://dbpedia.org/%' and http_request_header (http_request_header (), 'Host') <> 'dbpedia.org')
+    -- return regexp_replace (x, 'http://dbpedia.org', 'http://'||http_request_header (http_request_header (), 'Host'));
+
+  if (x like registry_get('dbp_domain') || '/%' and http_request_header (http_request_header (), 'Host') <> replace(registry_get('dbp_domain'),'http://',''))
+    return regexp_replace (x, registry_get('dbp_domain'), 'http://'||http_request_header (http_request_header (), 'Host'));
 
   if (connection_get ('mappers_installed') = 1 and (
       x like 'http://www.w3.org/2002/07/owl%' or
@@ -604,7 +604,7 @@ create procedure dbp_ldd_http_print_l (in p_text any, inout odd_position int, in
    else
      title := sprintf (' title="%V"', title);
 
-   http (sprintf ('<tr class="%s"><td class="col-2">', either(mod (odd_position, 2), 'odd', 'even')));
+   http (sprintf ('<tr class="%s"><td class="property">', either(mod (odd_position, 2), 'odd', 'even')));
    if (rev) http ('is ');
    if (short_p is not null)
       http (sprintf ('<a class="uri" href="%V"%s><small>%V:</small>%V</a>\n',
@@ -618,7 +618,7 @@ create procedure dbp_ldd_http_print_l (in p_text any, inout odd_position int, in
   charset_recode (title, 'UTF-8', '_WIDE_'),
   charset_recode (p_prefix, 'UTF-8', '_WIDE_')));
    if (rev) http (' of');
-   http ('</td><td class="col-10 text-break"><ul>\n');
+   http ('</td><td><ul>\n');
 }
 ;
 
