@@ -416,6 +416,7 @@ create procedure dbp_ldd_uri_local_part (in uri varchar)
 }
 ;
 
+
 create procedure dbp_ldd_subject (in _S any, in _G varchar, in lines any := null)
 {
   declare best_str, meta, data any;
