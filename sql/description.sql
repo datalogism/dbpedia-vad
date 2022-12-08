@@ -212,7 +212,7 @@ create procedure dbp_ldd_get_default_lang_acc (in lines any := null)
     }
   else
     {
-      langs := registry_get('dbp_lang') || ', en;q=0.8';
+      langs := registry_get('dbp_lang') || ', fr, en;q=0.8';
     }
 
   return langs;
@@ -251,7 +251,7 @@ create procedure dbp_ldd_get_lang_by_q (in accept varchar, in lang varchar)
   }
     }
   ret:
-  if (q = 0 and lang = 'en')
+  if (q = 0 and lang = 'fr')
     q := 0.002;
   if (q = 0 and not length (lang))
     q := 0.001;
@@ -287,7 +287,7 @@ again:
 
   langs := dbp_ldd_get_default_lang_acc (lines);
 
-  exec ('sparql select ?o (lang(?o)) where { graph `iri(??)` { `iri(??)` rdfs:label ?o } }', null, null, vector (_G, _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
+  exec ('sparql select ?o (lang(?o)) where {  `iri(??)` rdfs:label ?o  }', null, null, vector ( _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
   best_str := '';
   best_q := 0;
   if (length (data))
@@ -311,7 +311,7 @@ again:
     {
       return best_str;
     }
-  exec ('sparql define input:inference "dbprdf-label" select ?o (lang(?o)) where { graph `iri(??)` { `iri(??)` virtrdf:label ?o } }', null, null, vector (_G, _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
+  exec ('sparql define input:inference "dbprdf-label" select ?o (lang(?o)) where {  `iri(??)` virtrdf:label ?o }}', null, null, vector ( _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
   best_str := '';
   best_q := 0;
   if (length (data))
