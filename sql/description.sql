@@ -524,8 +524,8 @@ create procedure dbp_ldd_get_proxy (in x varchar)
 {
   if (x like 'nodeID://%')
     return '/about/html/' || x;
-  if (x like 'http://dbpedia.org/%' and 'fr.dbpedia.org' <> 'dbpedia.org')
-    return regexp_replace (x, 'http://dbpedia.org', 'http://'||'fr.dbpedia.org');
+ -- if (x like 'http://dbpedia.org/%' and 'fr.dbpedia.org' <> 'dbpedia.org')
+   -- return regexp_replace (x, 'http://dbpedia.org', 'http://'||'fr.dbpedia.org');
   if (x like registry_get('dbp_domain') || '/%' and 'fr.dbpedia.org' <> replace(registry_get('dbp_domain'),'http://',''))
     return regexp_replace (x, registry_get('dbp_domain'), 'http://'||'fr.dbpedia.org');
 
