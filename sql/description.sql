@@ -47,148 +47,148 @@ create procedure dbp_ldd_set_ns_decl ()
   dbp_template  := registry_get ('dbp_template');
 
   arr := vector (
-    dbp_domain || '/property/',         'prop-'     || dbp_lang,
-    dbp_domain || '/resource/',         'dbpedia-'  || dbp_lang,
-    dbp_domain || '/resource/' || dbp_category || ':',    'category-' || dbp_lang,
-    dbp_domain || '/resource/' || dbp_template || ':',    'template-' || dbp_lang,
+    dbp_domain || '/property/', 				'prop-'     || dbp_lang,
+    dbp_domain || '/resource/', 				'dbpedia-'  || dbp_lang,
+    dbp_domain || '/resource/' || dbp_category || ':',		'category-' || dbp_lang,
+    dbp_domain || '/resource/' || dbp_template || ':', 		'template-' || dbp_lang,
 
-    'http://dbpedia.org/ontology/',       'dbo',
-    'http://dbpedia.org/property/',       'dbp',
-    'http://dbpedia.org/resource/',       'dbr',
-    'http://dbpedia.org/resource/Category:',      'dbc',
-    'http://dbpedia.org/resource/Template:',      'dbt',
-    'http://dbpedia.org/units/',        'units',
-    'http://dbpedia.org/class/yago/',       'yago',
+    'http://dbpedia.org/ontology/',				'dbo',
+    'http://dbpedia.org/property/',				'dbp',
+    'http://dbpedia.org/resource/',				'dbr',
+    'http://dbpedia.org/resource/Category:',			'dbc',
+    'http://dbpedia.org/resource/Template:',			'dbt',
+    'http://dbpedia.org/units/',				'units',
+    'http://dbpedia.org/class/yago/',				'yago',
 
-    'http://data.nytimes.com/',         'nyt',
-    'http://linkedgeodata.org/triplify/',       'lgdt',
-    'http://purl.org/dc/elements/1.1/',       'dc',
-    'http://purl.org/dc/terms/',        'dct',
-    'http://rdf.freebase.com/ns/',        'freebase',
-    'http://schema.org/',           'schema',
-    'http://sw.opencyc.org/concept/',       'opencyc',
-    'http://sws.geonames.org/',         'geodata',
-    'http://umbel.org/umbel/ac/',       'umbel-ac',
-    'http://umbel.org/umbel/rc/',       'umbel-rc',
-    'http://umbel.org/umbel/sc/',       'umbel-sc',
-    'http://www.geonames.org/ontology#',      'geonames',
-    'http://www.georss.org/georss/',        'georss',
-    'http://www.ontologydesignpatterns.org/ont/dul/DUL.owl',  'dul',
-    'http://www.w3.org/1999/02/22-rdf-syntax-ns#',    'rdf',
-    'http://www.w3.org/2000/01/rdf-schema#',      'rdfs',
-    'http://www.w3.org/2001/XMLSchema#',      'xsd',
-    'http://www.w3.org/2002/07/owl#',       'owl',
-    'http://www.w3.org/2003/01/geo/wgs84_pos#',     'geo',
-    'http://www.w3.org/2004/02/skos/core#',     'skos',
-    'http://www.w3.org/2007/05/powder-s#',      'wdrs',
-    'http://www.w3.org/ns/prov#',       'prov',
-    'http://xmlns.com/foaf/0.1/',       'foaf',
-    'http://yago-knowledge.org/resource/',      'yago-res',
+    'http://data.nytimes.com/',					'nyt',
+    'http://linkedgeodata.org/triplify/', 			'lgdt',
+    'http://purl.org/dc/elements/1.1/',				'dc',
+    'http://purl.org/dc/terms/',				'dct',
+    'http://rdf.freebase.com/ns/',				'freebase',
+    'http://schema.org/', 					'schema',
+    'http://sw.opencyc.org/concept/',				'opencyc',
+    'http://sws.geonames.org/', 				'geodata',
+    'http://umbel.org/umbel/ac/',				'umbel-ac',
+    'http://umbel.org/umbel/rc/',				'umbel-rc',
+    'http://umbel.org/umbel/sc/',				'umbel-sc',
+    'http://www.geonames.org/ontology#',			'geonames',
+    'http://www.georss.org/georss/',				'georss',
+    'http://www.ontologydesignpatterns.org/ont/dul/DUL.owl',	'dul',
+    'http://www.w3.org/1999/02/22-rdf-syntax-ns#',		'rdf',
+    'http://www.w3.org/2000/01/rdf-schema#',			'rdfs',
+    'http://www.w3.org/2001/XMLSchema#',			'xsd',
+    'http://www.w3.org/2002/07/owl#',				'owl',
+    'http://www.w3.org/2003/01/geo/wgs84_pos#',			'geo',
+    'http://www.w3.org/2004/02/skos/core#',			'skos',
+    'http://www.w3.org/2007/05/powder-s#',			'wdrs',
+    'http://www.w3.org/ns/prov#',				'prov',
+    'http://xmlns.com/foaf/0.1/',				'foaf',
+    'http://yago-knowledge.org/resource/',			'yago-res',
     'http://purl.org/linguistics/gold/',                       'gold',
 
-    'http://commons.wikimedia.org/wiki/',     'wiki-commons',
-    'http://www.wikidata.org/entity/',        'wikidata',
-    'http://' || dbp_lang || '.wikipedia.org/wiki/',    'wikipedia-' || dbp_lang,
+    'http://commons.wikimedia.org/wiki/',			'wiki-commons',
+    'http://www.wikidata.org/entity/',				'wikidata',
+    'http://' || dbp_lang || '.wikipedia.org/wiki/', 		'wikipedia-' || dbp_lang,
 
-    'http://commons.dbpedia.org/resource/',     'dbpedia-commons',
-    'http://wikidata.dbpedia.org/resource/',      'dbpedia-wikidata',
-    'http://dbpedia.openlinksw.com/wikicompany/',   'dbpedia-wikicompany',
+    'http://commons.dbpedia.org/resource/',			'dbpedia-commons',
+    'http://wikidata.dbpedia.org/resource/',			'dbpedia-wikidata',
+    'http://dbpedia.openlinksw.com/wikicompany/',		'dbpedia-wikicompany',
 
-    'http://af.dbpedia.org/resource/',        'dbpedia-af',
-    'http://als.dbpedia.org/resource/',       'dbpedia-als',
-    'http://an.dbpedia.org/resource/',        'dbpedia-an',
-    'http://ar.dbpedia.org/resource/',        'dbpedia-ar',
-    'http://az.dbpedia.org/resource/',        'dbpedia-az',
-    'http://bar.dbpedia.org/resource/',       'dbpedia-bar',
-    'http://be-x-old.dbpedia.org/resource/',      'dbpedia-be-x-old',
-    'http://be.dbpedia.org/resource/',        'dbpedia-be',
-    'http://bg.dbpedia.org/resource/',        'dbpedia-bg',
-    'http://br.dbpedia.org/resource/',        'dbpedia-br',
-    'http://ca.dbpedia.org/resource/',        'dbpedia-ca',
-    'http://cs.dbpedia.org/resource/',        'dbpedia-cs',
-    'http://cy.dbpedia.org/resource/',        'dbpedia-cy',
-    'http://da.dbpedia.org/resource/',        'dbpedia-da',
-    'http://de.dbpedia.org/resource/',        'dbpedia-de',
-    'http://dsb.dbpedia.org/resource/',       'dbpedia-dsb',
-    'http://el.dbpedia.org/resource/',        'dbpedia-el',
-    'http://eo.dbpedia.org/resource/',        'dbpedia-eo',
-    'http://es.dbpedia.org/resource/',        'dbpedia-es',
-    'http://et.dbpedia.org/resource/',        'dbpedia-et',
-    'http://eu.dbpedia.org/resource/',        'dbpedia-eu',
-    'http://fa.dbpedia.org/resource/',        'dbpedia-fa',
-    'http://fi.dbpedia.org/resource/',        'dbpedia-fi',
-    'http://fr.dbpedia.org/resource/',        'dbpedia-fr',
-    'http://frr.dbpedia.org/resource/',       'dbpedia-frr',
-    'http://fy.dbpedia.org/resource/',        'dbpedia-fy',
-    'http://ga.dbpedia.org/resource/',        'dbpedia-ga',
-    'http://gd.dbpedia.org/resource/',        'dbpedia-gd',
-    'http://gl.dbpedia.org/resource/',        'dbpedia-gl',
-    'http://he.dbpedia.org/resource/',        'dbpedia-he',
-    'http://hr.dbpedia.org/resource/',        'dbpedia-hr',
-    'http://hsb.dbpedia.org/resource/',       'dbpedia-hsb',
-    'http://hu.dbpedia.org/resource/',        'dbpedia-hu',
-    'http://id.dbpedia.org/resource/',        'dbpedia-id',
-    'http://ie.dbpedia.org/resource/',        'dbpedia-ie',
-    'http://io.dbpedia.org/resource/',        'dbpedia-io',
-    'http://is.dbpedia.org/resource/',        'dbpedia-is',
-    'http://it.dbpedia.org/resource/',        'dbpedia-it',
-    'http://ja.dbpedia.org/resource/',        'dbpedia-ja',
-    'http://ka.dbpedia.org/resource/',        'dbpedia-ka',
-    'http://kk.dbpedia.org/resource/',        'dbpedia-kk',
-    'http://ko.dbpedia.org/resource/',        'dbpedia-ko',
-    'http://ku.dbpedia.org/resource/',        'dbpedia-ku',
-    'http://la.dbpedia.org/resource/',        'dbpedia-la',
-    'http://lb.dbpedia.org/resource/',        'dbpedia-lb',
-    'http://lmo.dbpedia.org/resource/',       'dbpedia-lmo',
-    'http://lt.dbpedia.org/resource/as',      'dbpedia-lt',
-    'http://lv.dbpedia.org/resource/a',       'dbpedia-lv',
-    'http://mk.dbpedia.org/resource/',        'dbpedia-mk',
-    'http://mr.dbpedia.org/resource/',        'dbpedia-mr',
-    'http://ms.dbpedia.org/resource/',        'dbpedia-ms',
-    'http://nah.dbpedia.org/resource/',       'dbpedia-nah',
-    'http://nds.dbpedia.org/resource/',       'dbpedia-nds',
-    'http://nl.dbpedia.org/resource/',        'dbpedia-nl',
-    'http://nn.dbpedia.org/resource/',        'dbpedia-nn',
-    'http://no.dbpedia.org/resource/',        'dbpedia-no',
-    'http://nov.dbpedia.org/resource/',       'dbpedia-nov',
-    'http://oc.dbpedia.org/resource/',        'dbpedia-oc',
-    'http://os.dbpedia.org/resource/',        'dbpedia-os',
-    'http://pam.dbpedia.org/resource/',       'dbpedia-pam',
-    'http://pl.dbpedia.org/resource/',        'dbpedia-pl',
-    'http://pms.dbpedia.org/resource/',       'dbpedia-pms',
-    'http://pnb.dbpedia.org/resource/',       'dbpedia-pnb',
-    'http://pt.dbpedia.org/resource/',        'dbpedia-pt',
-    'http://ro.dbpedia.org/resource/',        'dbpedia-ro',
-    'http://ru.dbpedia.org/resource/',        'dbpedia-ru',
-    'http://sh.dbpedia.org/resource/',        'dbpedia-sh',
-    'http://simple.dbpedia.org/resource/',      'dbpedia-simple',
-    'http://sk.dbpedia.org/resource/',        'dbpedia-sk',
-    'http://sl.dbpedia.org/resource/',        'dbpedia-sl',
-    'http://sq.dbpedia.org/resource/',        'dbpedia-sq',
-    'http://sr.dbpedia.org/resource/',        'dbpedia-sr',
-    'http://sv.dbpedia.org/resource/',        'dbpedia-sv',
-    'http://sw.dbpedia.org/resource/',        'dbpedia-sw',
-    'http://th.dbpedia.org/resource/',        'dbpedia-th',
-    'http://tr.dbpedia.org/resource/',        'dbpedia-tr',
-    'http://ug.dbpedia.org/resource/',        'dbpedia-ug',
-    'http://uk.dbpedia.org/resource/',        'dbpedia-uk',
-    'http://vi.dbpedia.org/resource/',        'dbpedia-vi',
-    'http://vo.dbpedia.org/resource/',        'dbpedia-vo',
-    'http://war.dbpedia.org/resource/',       'dbpedia-war',
-    'http://yo.dbpedia.org/resource/',        'dbpedia-yo',
-    'http://zh-min-nan.dbpedia.org/resource/',      'dbpedia-zh-min-nan',
-    'http://zh.dbpedia.org/resource/',        'dbpedia-zh'
+    'http://af.dbpedia.org/resource/',				'dbpedia-af',
+    'http://als.dbpedia.org/resource/',				'dbpedia-als',
+    'http://an.dbpedia.org/resource/',				'dbpedia-an',
+    'http://ar.dbpedia.org/resource/',				'dbpedia-ar',
+    'http://az.dbpedia.org/resource/',				'dbpedia-az',
+    'http://bar.dbpedia.org/resource/',				'dbpedia-bar',
+    'http://be-x-old.dbpedia.org/resource/',			'dbpedia-be-x-old',
+    'http://be.dbpedia.org/resource/',				'dbpedia-be',
+    'http://bg.dbpedia.org/resource/',				'dbpedia-bg',
+    'http://br.dbpedia.org/resource/',				'dbpedia-br',
+    'http://ca.dbpedia.org/resource/',				'dbpedia-ca',
+    'http://cs.dbpedia.org/resource/',				'dbpedia-cs',
+    'http://cy.dbpedia.org/resource/',				'dbpedia-cy',
+    'http://da.dbpedia.org/resource/',				'dbpedia-da',
+    'http://de.dbpedia.org/resource/',				'dbpedia-de',
+    'http://dsb.dbpedia.org/resource/',				'dbpedia-dsb',
+    'http://el.dbpedia.org/resource/',				'dbpedia-el',
+    'http://eo.dbpedia.org/resource/',				'dbpedia-eo',
+    'http://es.dbpedia.org/resource/',				'dbpedia-es',
+    'http://et.dbpedia.org/resource/',				'dbpedia-et',
+    'http://eu.dbpedia.org/resource/',				'dbpedia-eu',
+    'http://fa.dbpedia.org/resource/',				'dbpedia-fa',
+    'http://fi.dbpedia.org/resource/',				'dbpedia-fi',
+    'http://fr.dbpedia.org/resource/',				'dbpedia-fr',
+    'http://frr.dbpedia.org/resource/',				'dbpedia-frr',
+    'http://fy.dbpedia.org/resource/',				'dbpedia-fy',
+    'http://ga.dbpedia.org/resource/',				'dbpedia-ga',
+    'http://gd.dbpedia.org/resource/',				'dbpedia-gd',
+    'http://gl.dbpedia.org/resource/',				'dbpedia-gl',
+    'http://he.dbpedia.org/resource/',				'dbpedia-he',
+    'http://hr.dbpedia.org/resource/',				'dbpedia-hr',
+    'http://hsb.dbpedia.org/resource/',				'dbpedia-hsb',
+    'http://hu.dbpedia.org/resource/',				'dbpedia-hu',
+    'http://id.dbpedia.org/resource/',				'dbpedia-id',
+    'http://ie.dbpedia.org/resource/',				'dbpedia-ie',
+    'http://io.dbpedia.org/resource/',				'dbpedia-io',
+    'http://is.dbpedia.org/resource/',				'dbpedia-is',
+    'http://it.dbpedia.org/resource/',				'dbpedia-it',
+    'http://ja.dbpedia.org/resource/',				'dbpedia-ja',
+    'http://ka.dbpedia.org/resource/',				'dbpedia-ka',
+    'http://kk.dbpedia.org/resource/',				'dbpedia-kk',
+    'http://ko.dbpedia.org/resource/',				'dbpedia-ko',
+    'http://ku.dbpedia.org/resource/',				'dbpedia-ku',
+    'http://la.dbpedia.org/resource/',				'dbpedia-la',
+    'http://lb.dbpedia.org/resource/',				'dbpedia-lb',
+    'http://lmo.dbpedia.org/resource/',				'dbpedia-lmo',
+    'http://lt.dbpedia.org/resource/as',			'dbpedia-lt',
+    'http://lv.dbpedia.org/resource/a',				'dbpedia-lv',
+    'http://mk.dbpedia.org/resource/',				'dbpedia-mk',
+    'http://mr.dbpedia.org/resource/',				'dbpedia-mr',
+    'http://ms.dbpedia.org/resource/',				'dbpedia-ms',
+    'http://nah.dbpedia.org/resource/',				'dbpedia-nah',
+    'http://nds.dbpedia.org/resource/',				'dbpedia-nds',
+    'http://nl.dbpedia.org/resource/',				'dbpedia-nl',
+    'http://nn.dbpedia.org/resource/',				'dbpedia-nn',
+    'http://no.dbpedia.org/resource/',				'dbpedia-no',
+    'http://nov.dbpedia.org/resource/',				'dbpedia-nov',
+    'http://oc.dbpedia.org/resource/',				'dbpedia-oc',
+    'http://os.dbpedia.org/resource/',				'dbpedia-os',
+    'http://pam.dbpedia.org/resource/',				'dbpedia-pam',
+    'http://pl.dbpedia.org/resource/',				'dbpedia-pl',
+    'http://pms.dbpedia.org/resource/',				'dbpedia-pms',
+    'http://pnb.dbpedia.org/resource/',				'dbpedia-pnb',
+    'http://pt.dbpedia.org/resource/',				'dbpedia-pt',
+    'http://ro.dbpedia.org/resource/',				'dbpedia-ro',
+    'http://ru.dbpedia.org/resource/',				'dbpedia-ru',
+    'http://sh.dbpedia.org/resource/',				'dbpedia-sh',
+    'http://simple.dbpedia.org/resource/',			'dbpedia-simple',
+    'http://sk.dbpedia.org/resource/',				'dbpedia-sk',
+    'http://sl.dbpedia.org/resource/',				'dbpedia-sl',
+    'http://sq.dbpedia.org/resource/',				'dbpedia-sq',
+    'http://sr.dbpedia.org/resource/',				'dbpedia-sr',
+    'http://sv.dbpedia.org/resource/',				'dbpedia-sv',
+    'http://sw.dbpedia.org/resource/',				'dbpedia-sw',
+    'http://th.dbpedia.org/resource/',				'dbpedia-th',
+    'http://tr.dbpedia.org/resource/',				'dbpedia-tr',
+    'http://ug.dbpedia.org/resource/',				'dbpedia-ug',
+    'http://uk.dbpedia.org/resource/',				'dbpedia-uk',
+    'http://vi.dbpedia.org/resource/',				'dbpedia-vi',
+    'http://vo.dbpedia.org/resource/',				'dbpedia-vo',
+    'http://war.dbpedia.org/resource/',				'dbpedia-war',
+    'http://yo.dbpedia.org/resource/',				'dbpedia-yo',
+    'http://zh-min-nan.dbpedia.org/resource/',			'dbpedia-zh-min-nan',
+    'http://zh.dbpedia.org/resource/',				'dbpedia-zh'
 );
 
    l := length (arr);
    for (i := 0; i < l; i := i + 2)
       {
-  declare pre any;
-  XML_REMOVE_NS_BY_PREFIX (arr[i+1], 2);
-  pre := (select NS_PREFIX from DB.DBA.SYS_XML_PERSISTENT_NS_DECL where NS_URL = arr[i]);
-  if (pre is not null)
-    XML_REMOVE_NS_BY_PREFIX (pre, 2);
-  XML_SET_NS_DECL (arr[i+1], arr[i], 2);
+	declare pre any;
+	XML_REMOVE_NS_BY_PREFIX (arr[i+1], 2);
+	pre := (select NS_PREFIX from DB.DBA.SYS_XML_PERSISTENT_NS_DECL where NS_URL = arr[i]);
+	if (pre is not null)
+	  XML_REMOVE_NS_BY_PREFIX (pre, 2);
+	XML_SET_NS_DECL (arr[i+1], arr[i], 2);
       }
 }
 ;
@@ -204,15 +204,15 @@ create procedure dbp_ldd_get_default_lang_acc (in lines any := null)
     {
       langs := http_request_header_full (lines, 'Accept-Language', 'en');
       if (langs is not null)
-  {
-    langs := replace (langs, 'en-us', 'en');
-    langs := replace (langs, 'en-uk', 'en');
-    langs := replace (langs, 'en-gb', 'en');
-  }
+	{
+	  langs := replace (langs, 'en-us', 'en');
+	  langs := replace (langs, 'en-uk', 'en');
+	  langs := replace (langs, 'en-gb', 'en');
+	}
     }
   else
     {
-      langs := registry_get('dbp_lang') || ', fr, en;q=0.8';
+      langs := registry_get('dbp_lang') || ', en;q=0.8';
     }
 
   return langs;
@@ -235,23 +235,23 @@ create procedure dbp_ldd_get_lang_by_q (in accept varchar, in lang varchar)
       declare tmp any;
       itm := trim(arr[i]);
       if (itm = lang)
-  {
-    q := arr[i+1];
-    if (q is null)
-      q := 1.0;
-    else
-      {
-        tmp := split_and_decode (q, 0, '\0\0=');
-        if (length (tmp) = 2)
-    q := atof (tmp[1]);
-        else
-    q := 1.0;
-      }
-    goto ret;
-  }
+	{
+	  q := arr[i+1];
+	  if (q is null)
+	    q := 1.0;
+	  else
+	    {
+	      tmp := split_and_decode (q, 0, '\0\0=');
+	      if (length (tmp) = 2)
+		q := atof (tmp[1]);
+	      else
+		q := 1.0;
+	    }
+	  goto ret;
+	}
     }
   ret:
-  if (q = 0 and lang = 'fr')
+  if (q = 0 and lang = 'en')
     q := 0.002;
   if (q = 0 and not length (lang))
     q := 0.001;
@@ -271,11 +271,11 @@ create procedure dbp_ldd_label (in _S any, in _G varchar, in lines any := null)
   declare exit handler for sqlstate '42000'
     {
       if (retr and __SQL_MESSAGE like '%Inference context %')
-  {
-    rdfs_load_schema ('dbprdf-label', 'dbprdf-label');
-    retr := 0;
-    goto again;
-  }
+	{
+	  rdfs_load_schema ('dbprdf-label', 'dbprdf-label');
+	  retr := 0;
+	  goto again;
+	}
       return _S;
     };
 
@@ -287,20 +287,20 @@ again:
 
   langs := dbp_ldd_get_default_lang_acc (lines);
 
-  exec ('sparql select ?o (lang(?o)) where {  `iri(??)` rdfs:label ?o  }', null, null, vector ( _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
+  exec ('sparql select ?o (lang(?o)) where { graph `iri(??)` { `iri(??)` rdfs:label ?o } }', null, null, vector (_G, _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
   best_str := '';
   best_q := 0;
   if (length (data))
     {
       for (declare i, l int, i := 0, l := length (data); i < l; i := i + 1)
-  {
-    q := dbp_ldd_get_lang_by_q (langs, data[i][1]);
+	{
+	  q := dbp_ldd_get_lang_by_q (langs, data[i][1]);
           if (q > best_q)
-      {
-        best_str := data[i][0];
-        best_q := q;
-      }
-  }
+	    {
+	      best_str := data[i][0];
+	      best_q := q;
+	    }
+	}
     }
   if (__tag of rdf_box = __tag (best_str))
     {
@@ -311,20 +311,20 @@ again:
     {
       return best_str;
     }
-  exec ('sparql define input:inference "dbprdf-label" select ?o (lang(?o)) where {  `iri(??)` virtrdf:label ?o }}', null, null, vector ( _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
+  exec ('sparql define input:inference "dbprdf-label" select ?o (lang(?o)) where { graph `iri(??)` { `iri(??)` virtrdf:label ?o } }', null, null, vector (_G, _S), vector ('use_cache', 1, 'max_rows', 0), meta, data);
   best_str := '';
   best_q := 0;
   if (length (data))
     {
       for (declare i, l int, i := 0, l := length (data); i < l; i := i + 1)
-  {
-    q := dbp_ldd_get_lang_by_q (langs, data[i][1]);
+	{
+	  q := dbp_ldd_get_lang_by_q (langs, data[i][1]);
           if (q > best_q)
-      {
-        best_str := data[i][0];
-        best_q := q;
-      }
-  }
+	    {
+	      best_str := data[i][0];
+	      best_q := q;
+	    }
+	}
     }
   if (__tag of rdf_box = __tag (best_str))
     {
@@ -355,18 +355,18 @@ create procedure dbp_ldd_type (in gr varchar, in subj varchar, out url varchar, 
       exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'\')) ?tp from <%S> from virtrdf:schemas { `iri(??)` <http://dbpedia.org/ontology/type>  ?tp . optional { ?tp rdfs:label ?l } }', langs, gr), null, null, vector (subj), 0, meta, data);
       if (not length (data))
         exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'\')) ?tp from <%S> from virtrdf:schemas { `iri(??)` a ?tp . optional { ?tp rdfs:label ?l } filter (?tp like <http://dbpedia.org/ontology/%%>) }', langs, gr),
-    null, null, vector ( subj), 0, meta, data);
+	  null, null, vector ( subj), 0, meta, data);
       if (not length (data))
         exec (sprintf ('sparql select (sql:BEST_LANGMATCH (?l, \'%S\', \'\')) ?tp from <%S> from virtrdf:schemas { `iri(??)` a ?tp . optional { ?tp rdfs:label ?l } }', langs, gr),
-    null, null, vector (subj), 0, meta, data);
+	  null, null, vector (subj), 0, meta, data);
       if (length (data))
-  {
-    if (data[0][0] is not null and data[0][0] <> 0)
-        ll := data[0][0];
-    else
-      ll := dbp_ldd_uri_local_part (data[0][1]);
-    url := dbp_ldd_get_proxy (data[0][1]);
-  }
+	{
+	  if (data[0][0] is not null and data[0][0] <> 0)
+  	    ll := data[0][0];
+	  else
+	    ll := dbp_ldd_uri_local_part (data[0][1]);
+	  url := dbp_ldd_get_proxy (data[0][1]);
+	}
     }
   if (__tag of rdf_box = __tag (ll))
     {
@@ -416,7 +416,6 @@ create procedure dbp_ldd_uri_local_part (in uri varchar)
 }
 ;
 
-
 create procedure dbp_ldd_subject (in _S any, in _G varchar, in lines any := null)
 {
   declare best_str, meta, data any;
@@ -446,6 +445,7 @@ create procedure dbp_ldd_subject (in _S any, in _G varchar, in lines any := null
   return best_str;
 }
 ;
+
 
 create procedure
 dbp_ldd_trunc_uri (in s varchar, in maxlen int := 80)
@@ -489,7 +489,7 @@ create procedure dbp_ldd_split_url (in uri varchar, out pref varchar, out res va
       delim := __max (delim, coalesce (strrchr (uriSearch, '#'), 0));
       delim := __max (delim, coalesce (strrchr (uriSearch, ':'), 0));
       nsPrefix := coalesce (__xml_get_ns_prefix (subseq (uriSearch, 0, delim + 1), 2),
-                __xml_get_ns_prefix (subseq (uriSearch, 0, delim),     2));
+      			    __xml_get_ns_prefix (subseq (uriSearch, 0, delim),     2));
       uriSearch := subseq (uriSearch, 0, delim);
     }
   if (nsPrefix is not null)
@@ -497,23 +497,23 @@ create procedure dbp_ldd_split_url (in uri varchar, out pref varchar, out res va
       declare rhs varchar;
       rhs := subseq(uri, length (uriSearch) + 1, null);
       if (length (rhs))
-  {
-    pref := nsPrefix;
-    if (regexp_match ('(_percent_[0-9A-F][0-9A-F])', rhs))
-      {
-        rhs := regexp_replace (rhs, '(_percent_)', '%', 1, null);
-      }
-    if (regexp_match ('%[0-9A-F][0-9A-F]', rhs))
-      {
-        declare tmp any;
-        tmp := split_and_decode (rhs)[0];
-        if (charset_recode (tmp, 'UTF-8', null))
-    rhs := tmp;
-      }
-    rhs := dbp_ldd_trunc_uri (rhs);
-    res := coalesce (label, rhs);
-    return;
-  }
+	{
+	  pref := nsPrefix;
+	  if (regexp_match ('(_percent_[0-9A-F][0-9A-F])', rhs))
+	    {
+	      rhs := regexp_replace (rhs, '(_percent_)', '%', 1, null);
+	    }
+	  if (regexp_match ('%[0-9A-F][0-9A-F]', rhs))
+	    {
+	      declare tmp any;
+	      tmp := split_and_decode (rhs)[0];
+	      if (charset_recode (tmp, 'UTF-8', null))
+		rhs := tmp;
+	    }
+	  rhs := dbp_ldd_trunc_uri (rhs);
+	  res := coalesce (label, rhs);
+	  return;
+	}
     }
   pref := uri;
   res := null;
@@ -524,10 +524,10 @@ create procedure dbp_ldd_get_proxy (in x varchar)
 {
   if (x like 'nodeID://%')
     return '/about/html/' || x;
- -- if (x like 'http://dbpedia.org/%' and 'fr.dbpedia.org' <> 'dbpedia.org')
-   -- return regexp_replace (x, 'http://dbpedia.org', 'http://'||'fr.dbpedia.org');
-  if (x like registry_get('dbp_domain') || '/%' and 'fr.dbpedia.org' <> replace(registry_get('dbp_domain'),'http://',''))
-    return regexp_replace (x, registry_get('dbp_domain'), 'http://'||'fr.dbpedia.org');
+  --if (x like 'http://dbpedia.org/%' and http_request_header (http_request_header (), 'Host') <> 'dbpedia.org')
+    --return regexp_replace (x, 'http://dbpedia.org', 'http://'||http_request_header (http_request_header (), 'Host'));
+  --if (x like registry_get('dbp_domain') || '/%' and http_request_header (http_request_header (), 'Host') <> replace(registry_get('dbp_domain'),'http://',''))
+    --return regexp_replace (x, registry_get('dbp_domain'), 'http://'||http_request_header (http_request_header (), 'Host'));
 
   if (connection_get ('mappers_installed') = 1 and (
       x like 'http://www.w3.org/2002/07/owl%' or
@@ -559,18 +559,18 @@ create procedure dbp_ldd_get_lang_acc (in lines any)
       declare tmp any;
       itm := trim(arr[i]);
       if (itm like '%-%')
-  itm := subseq (itm, 0, strchr (itm, '-'));
+	itm := subseq (itm, 0, strchr (itm, '-'));
       q := arr[i+1];
       if (q is null)
-  q := 1.0;
+	q := 1.0;
       else
-  {
-    tmp := split_and_decode (q, 0, '\0\0=');
-    if (length (tmp) = 2)
-      q := atof (tmp[1]);
-    else
-      q := 1.0;
-  }
+	{
+	  tmp := split_and_decode (q, 0, '\0\0=');
+	  if (length (tmp) = 2)
+	    q := atof (tmp[1]);
+	  else
+	    q := 1.0;
+	}
       ret[i] := itm;
       ret[i+1] := q;
     }
@@ -609,15 +609,15 @@ create procedure dbp_ldd_http_print_l (in p_text any, inout odd_position int, in
    if (rev) http ('is ');
    if (short_p is not null)
       http (sprintf ('<a class="uri" href="%V"%s><small>%V:</small>%V</a>\n',
-  charset_recode (href, 'UTF-8', '_WIDE_'),
-  charset_recode (title, 'UTF-8', '_WIDE_'),
-  charset_recode (p_prefix, 'UTF-8', '_WIDE_'),
-  charset_recode (short_p, 'UTF-8', '_WIDE_')));
+	charset_recode (href, 'UTF-8', '_WIDE_'),
+	charset_recode (title, 'UTF-8', '_WIDE_'),
+	charset_recode (p_prefix, 'UTF-8', '_WIDE_'),
+	charset_recode (short_p, 'UTF-8', '_WIDE_')));
    else
       http (sprintf ('<a class="uri" href="%V"%s>%V</a>\n',
-  charset_recode (href, 'UTF-8', '_WIDE_'),
-  charset_recode (title, 'UTF-8', '_WIDE_'),
-  charset_recode (p_prefix, 'UTF-8', '_WIDE_')));
+	charset_recode (href, 'UTF-8', '_WIDE_'),
+	charset_recode (title, 'UTF-8', '_WIDE_'),
+	charset_recode (p_prefix, 'UTF-8', '_WIDE_')));
    if (rev) http (' of');
    http ('</td><td class="col-10 text-break"><ul>\n');
 }
@@ -750,51 +750,51 @@ again:
 
        _label := null;
        if (pred = rdf_sas_iri ())
-   _label := label;
+	 _label := label;
        _url := id_to_iri (_object);
        if (_url is null)
-   {
-     _object := 'unknown IRI_ID';
-     goto string_type;
-   }
+	 {
+	   _object := 'unknown IRI_ID';
+	   goto string_type;
+	 }
        if (_url like 'http://sw.opencyc.org/2008/06/10/concept/%')
-   {
-     declare h_url varchar;
-     declare stat, msg, data, meta any;
-     stat := '00000';
-     exec (sprintf ('sparql select * from <http://dbpedia.org/resource/classes/opencyc-readable#> where { ?x owl:sameAs <%s> } limit 1', _url),
-         stat, msg, vector (), 0, meta, data);
-     if (length (data))
-       h_url := data[0][0];
-     else
-       h_url := _url;
-     dbp_ldd_split_url (h_url, p_t, s_t);
-   }
+	 {
+	   declare h_url varchar;
+	   declare stat, msg, data, meta any;
+	   stat := '00000';
+	   exec (sprintf ('sparql select * from <http://dbpedia.org/resource/classes/opencyc-readable#> where { ?x owl:sameAs <%s> } limit 1', _url),
+	       stat, msg, vector (), 0, meta, data);
+	   if (length (data))
+	     h_url := data[0][0];
+	   else
+	     h_url := _url;
+	   dbp_ldd_split_url (h_url, p_t, s_t);
+	 }
        else
-   dbp_ldd_split_url (_url, p_t, s_t, _label);
+	 dbp_ldd_split_url (_url, p_t, s_t, _label);
 
        declare nofollow int;
        nofollow := 0;
        if (s_t is null and _url not like registry_get('dbp_domain') || '/%')
-   nofollow := 1;
+	 nofollow := 1;
 
        rdfa := dbp_ldd_rel_print (id_to_iri (pred), rel, _url, 0, lang, rdfs_type_short, nofollow);
 
        if (s_t is null)
-   {
-     http (sprintf ('<a class="uri" %s href="%V">%V</a>',
-     rdfa,
-    charset_recode (case when org then _url else dbp_ldd_get_proxy(_url) end, 'UTF-8', '_WIDE_'),
-    charset_recode (_url, 'UTF-8', '_WIDE_')));
-   }
+	 {
+	   http (sprintf ('<a class="uri" %s href="%V">%V</a>',
+		 rdfa,
+		charset_recode (case when org then _url else dbp_ldd_get_proxy(_url) end, 'UTF-8', '_WIDE_'),
+		charset_recode (_url, 'UTF-8', '_WIDE_')));
+	 }
        else
-   {
-     http (sprintf ('<a class="uri" %s href="%V"><small>%V</small>:%V</a>',
-     rdfa,
-    charset_recode (case when org then _url else dbp_ldd_get_proxy(_url) end, 'UTF-8', '_WIDE_'),
-    charset_recode (p_t, 'UTF-8', '_WIDE_'),
-    charset_recode (s_t, 'UTF-8', '_WIDE_')));
-   }
+	 {
+	   http (sprintf ('<a class="uri" %s href="%V"><small>%V</small>:%V</a>',
+		 rdfa,
+		charset_recode (case when org then _url else dbp_ldd_get_proxy(_url) end, 'UTF-8', '_WIDE_'),
+		charset_recode (p_t, 'UTF-8', '_WIDE_'),
+		charset_recode (s_t, 'UTF-8', '_WIDE_')));
+	 }
      }
    else if (__tag (_object) = 238)
      {
